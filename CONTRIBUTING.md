@@ -1,5 +1,3 @@
-Here’s a draft for the `CONTRIBUTING.md` file for the `surface2cirqit` project. This document provides guidelines on how others can contribute to the project effectively.
-
 ---
 
 # Contributing to `surface2cirqit`
