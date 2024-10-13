@@ -1,5 +1,3 @@
----
-
 # Contributing to `surface2cirqit`
 
 Thank you for your interest in contributing to `surface2cirqit`! Whether you’re reporting bugs, adding features, improving documentation, or helping others, your contribution is valuable to the community. Please follow these guidelines to ensure a smooth collaboration.
