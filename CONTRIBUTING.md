@@ -23,9 +23,10 @@ Ensure you have Python 3.8+ installed. To set up the development environment:
    python3 -m venv env
    source env/bin/activate  # On Windows use: env\Scripts\activate
    ```
-2. Install the required dependencies:
+2. Install the other (development related/) required dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install .
+   pip install .[dev]
    ```
 
 ### 3. Running Tests
