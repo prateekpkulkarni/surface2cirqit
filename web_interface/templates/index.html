@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>surface2cirqit Interface</title>
+    <style>
+        :root {
+            --csail-red: #A31F34;
+            --csail-gray: #8A8B8C;
+            --csail-light-gray: #E5E5E5;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: var(--csail-red);
+            text-align: center;
+            font-weight: 300;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: var(--csail-gray);
+            font-weight: 400;
+            margin-top: 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--csail-gray);
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--csail-light-gray);
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            background-color: var(--csail-red);
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #8A1F34;
+        }
+        #result {
+            white-space: pre-wrap;
+            background-color: var(--csail-light-gray);
+            padding: 15px;
+            border-radius: 4px;
+            border: 1px solid var(--csail-gray);
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>surface2cirqit Interface</h1>
+        
+        <form id="generateForm">
+            <h2>Generate Surface Code Circuit</h2>
+            <label for="distance">Distance (odd integer ≥ 3):</label>
+            <input type="number" id="distance" name="distance" required min="3" step="2">
+            <button type="submit">Generate Circuit</button>
+        </form>
+
+        <form id="operationForm">
+            <h2>Apply Logical Operation</h2>
+            <label for="opDistance">Distance (odd integer ≥ 3):</label>
+            <input type="number" id="opDistance" name="distance" required min="3" step="2">
+            <label for="operation">Operation:</label>
+            <select id="operation" name="operation" required>
+                <option value="X">Logical X</option>
+                <option value="Z">Logical Z</option>
+            </select>
+            <button type="submit">Apply Operation</button>
+        </form>
+
+        <h2>Result:</h2>
+        <div id="result"></div>
+
+        <div class="copyright">
+            &copy; 2024 Prateek P Kulkarni. All rights reserved.
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('generateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            fetch('/generate_circuit', {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('result').textContent = JSON.stringify(data.circuit, null, 2);
+                } else {
+                    document.getElementById('result').textContent = 'Error: ' + data.error;
+                }
+            })
+            .catch(error => {
+                document.getElementById('result').textContent = 'Error: ' + error;
+            });
+        });
+
+        document.getElementById('operationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            fetch('/apply_operation', {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('result').textContent = JSON.stringify(data.circuit, null, 2);
+                } else {
+                    document.getElementById('result').textContent = 'Error: ' + data.error;
+                }
+            })
+            .catch(error => {
+                document.getElementById('result').textContent = 'Error: ' + error;
+            });
+        });
+    </script>
+
+
+</body>
+</html>
