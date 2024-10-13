@@ -1,5 +1,5 @@
 # surface2cirqit
-![Z29cq1R6](https://github.com/user-attachments/assets/7b0214df-b89c-4a53-8592-f596e4e74b83)
+![Z29cq1R6](https://github.com/user-attachments/assets/7b0214df-b89c-4a53-8592-f596e4e74b83) <br>
 `surface2cirqit` is a high-precision Python package for generating quantum circuits for Surface Codes, designed to meet the exacting standards of advanced quantum error correction research.
 
 ## Table of Contents
